@@ -8,5 +8,20 @@ import jakarta.persistence.Table;
 @Table(name="patient")
 public class Patient extends Personne{
     @Column(name = "firstConsult")
-    private boolean firstConsult;
+    private boolean firstConsult=false;
+
+    public Patient() {
+    }
+
+    public Patient(boolean firstConsult) {
+        this.firstConsult = firstConsult;
+    }
+
+    public boolean isFirstConsult() {
+        return firstConsult;
+    }
+
+    public void setFirstConsult(boolean firstConsult) {
+        this.firstConsult = firstConsult;
+    }
 }

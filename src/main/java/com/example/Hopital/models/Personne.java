@@ -22,7 +22,7 @@ public abstract class Personne implements Serializable {
     @Column(name = "dateNaissance")
     private LocalDate dateNaissance;
 
-    //constructeurs
+    //constructeur
     public Personne() {
     }
 

@@ -11,4 +11,30 @@ public class Medecin extends Personne{
     @ManyToOne
     @JoinColumn(name="code_specialite", nullable = false)
     private Specialite specialite;
+
+    //Constructeurs
+    public Medecin() {
+    }
+
+    public Medecin(int salaire, Specialite specialite) {
+        this.salaire = salaire;
+        this.specialite = specialite;
+    }
+
+    // Getters et Setters
+    public int getSalaire() {
+        return salaire;
+    }
+
+    public void setSalaire(int salaire) {
+        this.salaire = salaire;
+    }
+
+    public Specialite getSpecialite() {
+        return specialite;
+    }
+
+    public void setSpecialite(Specialite specialite) {
+        this.specialite = specialite;
+    }
 }

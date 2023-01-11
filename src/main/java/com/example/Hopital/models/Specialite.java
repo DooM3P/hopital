@@ -15,4 +15,25 @@ public class Specialite implements Serializable {
 
     @Column(name = "name")
     private String name;
+
+    //Constructeur
+    public Specialite() {
+    }
+
+    //Getters et setters
+    public Long getCode() {
+        return code;
+    }
+
+    public void setCode(Long code) {
+        this.code = code;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

@@ -20,8 +20,17 @@ public class PatientController {
     @GetMapping(path = "/")
     public ResponseEntity<List<Patient>> getPatient() {
         try {
-            List<Patient> Patients = patientService.getPatients();
-            return new ResponseEntity<>(Patients, HttpStatus.OK);
+            List<Patient> patients = patientService.getPatients();
+            return new ResponseEntity<>(patients, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping(path = "/")
+    public ResponseEntity<Patient> savePatient(@RequestBody Patient patient) {
+        try {
+            return new ResponseEntity<>(patientService.savePatient(patient), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
