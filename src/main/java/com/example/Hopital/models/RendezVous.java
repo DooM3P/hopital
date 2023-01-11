@@ -5,14 +5,14 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name="consultation")
-public class Consultation {
+@Table(name="rendezvous")
+public class RendezVous {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idConsult;
 
     @Column(name = "dateRendezVous")
     private LocalDate dateRendezVous;
@@ -28,17 +28,17 @@ public class Consultation {
     private Medecin medecin;
 
     //Constructeur
-    public Consultation() {
+    public RendezVous() {
     }
 
     //Getters et setters
 
     public Long getId() {
-        return id;
+        return idConsult;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.idConsult = id;
     }
 
     public LocalDate getDateRendezVous() {
