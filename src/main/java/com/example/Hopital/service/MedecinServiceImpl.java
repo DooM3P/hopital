@@ -2,6 +2,7 @@ package com.example.Hopital.service;
 
 import com.example.Hopital.DAO.MedecinDAO;
 import com.example.Hopital.models.Medecin;
+import com.example.Hopital.models.Specialite;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +15,6 @@ public class MedecinServiceImpl implements MedecinService{
 
     @Autowired
     private MedecinDAO MedecinDAO;
-
-
 
     @Override
     public List<Medecin> getMedecins() {
@@ -36,6 +35,17 @@ public class MedecinServiceImpl implements MedecinService{
             return null;
         }
     }
+
+    @Override
+    public List<Medecin> getMedecinsBySpecialite(Specialite specialite) {
+        List<Medecin> medecinsBySpecialite = MedecinDAO.findBySpecialite(specialite);
+        if(!medecinsBySpecialite.isEmpty()){
+            return medecinsBySpecialite;
+        }else {
+            return null;
+        }
+    }
+
     @Override
     public Medecin saveMedecin(Medecin Medecin){
         //Medecin _Medecin = new Medecin();

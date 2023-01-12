@@ -2,7 +2,9 @@ package com.example.Hopital.controller;
 
 
 import com.example.Hopital.models.Patient;
+import com.example.Hopital.models.RendezVous;
 import com.example.Hopital.service.PatientService;
+import com.example.Hopital.service.RendezVousService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,9 @@ import java.util.List;
 public class PatientController {
     @Autowired // This means to get the bean called PatientService
     private PatientService patientService;
+
+    @Autowired
+    private RendezVousService rendezVousService;
 
     @GetMapping(path = "/")
     public ResponseEntity<List<Patient>> getPatient() {
@@ -39,6 +44,11 @@ public class PatientController {
     @GetMapping(path = "/{id}")
     public Patient getPatientById(@PathVariable Long id) {
         return patientService.getPatientByID(id);
+    }
+
+    @GetMapping(path = "/{id}/rendezvous")
+    public List<RendezVous> getRvByPatientId(@PathVariable Long id) {
+        return rendezVousService.getRendezVousByPatient(patientService.getPatientByID(id));
     }
 
     @DeleteMapping(path = "/{id}")

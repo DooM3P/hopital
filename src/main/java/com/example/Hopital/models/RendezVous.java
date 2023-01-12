@@ -12,7 +12,7 @@ public class RendezVous {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idConsult;
+    private Long idRendezvous;
 
     @Column(name = "dateRendezVous")
     private LocalDate dateRendezVous;
@@ -31,14 +31,15 @@ public class RendezVous {
     public RendezVous() {
     }
 
+
     //Getters et setters
 
     public Long getId() {
-        return idConsult;
+        return idRendezvous;
     }
 
     public void setId(Long id) {
-        this.idConsult = id;
+        this.idRendezvous = id;
     }
 
     public LocalDate getDateRendezVous() {

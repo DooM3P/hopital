@@ -2,7 +2,10 @@ package com.example.Hopital.controller;
 
 
 import com.example.Hopital.models.Medecin;
+import com.example.Hopital.models.RendezVous;
+import com.example.Hopital.models.Specialite;
 import com.example.Hopital.service.MedecinService;
+import com.example.Hopital.service.RendezVousService;
 import com.example.Hopital.service.SpecialiteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +23,9 @@ public class MedecinController {
     private MedecinService medecinService;
 
     @Autowired
+    private RendezVousService rendezVousService;
+
+    @Autowired
     private SpecialiteService specialiteService;
 
     @GetMapping(path = "/")
@@ -34,9 +40,6 @@ public class MedecinController {
 
     @PostMapping(path = "/")
     public ResponseEntity<Medecin> saveMedecin(@RequestBody Medecin medecin) {
-//        if (!medecin.getSpecialite().getName().isBlank()){
-//            medecin.setSpecialite(specialiteService.getSpecialiteByName(medecin.getSpecialite().getName()));
-//        }
         try {
             return new ResponseEntity<>(medecinService.saveMedecin(medecin), HttpStatus.CREATED);
         } catch (Exception e) {
@@ -44,9 +47,19 @@ public class MedecinController {
         }
     }
 
+    @GetMapping(path = "/specialite")
+    public List<Medecin> getMedecinBySpecialite(@RequestBody Specialite specialite) {
+        return medecinService.getMedecinsBySpecialite(specialite);
+    }
+
     @GetMapping(path = "/{id}")
     public Medecin getMedecinById(@PathVariable Long id) {
         return medecinService.getMedecinByID(id);
+    }
+
+    @GetMapping(path = "/{id}/rendezvous")
+    public List<RendezVous> getRvByMedecinId(@PathVariable Long id) {
+        return rendezVousService.getRendezVousByMedecin(medecinService.getMedecinByID(id));
     }
 
     @DeleteMapping(path = "/{id}")

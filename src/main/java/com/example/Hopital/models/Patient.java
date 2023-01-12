@@ -7,24 +7,26 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name="patient")
 public class Patient extends Personne{
-    @Column(name = "firstConsult")
-    private boolean firstConsult=false;
+    @Column(name = "dejaConsult")
+    private boolean dejaConsult =false;
 
     //Constructeur
     public Patient() {
     }
 
-
+    public Patient(Long id) {
+        super(id);
+    }
 
     public Patient(boolean firstConsult) {
-        this.firstConsult = firstConsult;
+        this.dejaConsult = firstConsult;
     }
 
     public boolean isFirstConsult() {
-        return firstConsult;
+        return dejaConsult;
     }
 
-    public void setFirstConsult(boolean firstConsult) {
-        this.firstConsult = firstConsult;
+    public void setDejaConsult(boolean firstConsult) {
+        this.dejaConsult = firstConsult;
     }
 }

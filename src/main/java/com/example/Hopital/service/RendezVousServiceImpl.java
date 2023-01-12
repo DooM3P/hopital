@@ -1,6 +1,8 @@
 package com.example.Hopital.service;
 
 import com.example.Hopital.DAO.RendezVousDAO;
+import com.example.Hopital.models.Medecin;
+import com.example.Hopital.models.Patient;
 import com.example.Hopital.models.RendezVous;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +38,39 @@ public class RendezVousServiceImpl implements RendezVousService {
             return null;
         }
     }
+
+    @Override
+    public List<RendezVous> getRendezVousByMedecin(Medecin medecin) {
+        List<RendezVous> rendezVousMedecin = rendezVousDAO.findByMedecin(medecin);
+        if(!rendezVousMedecin.isEmpty()) {
+            return rendezVousMedecin;
+        }else {
+            return null;
+        }
+    }
+
+    @Override
+    public List<RendezVous> getRendezVousByPatient(Patient patient) {
+        List<RendezVous> rendezVousPatient = rendezVousDAO.findByPatient(patient);
+        if(!rendezVousPatient.isEmpty()) {
+            return rendezVousPatient;
+        }else {
+            return null;
+        }
+    }
+    @Override
+    public RendezVous consultationCheckById(Long id) {
+        Optional<RendezVous> rendezVous = rendezVousDAO.findById(id);
+        if(rendezVous.isPresent() & rendezVous.get().isConsultationValid()==false) {
+            rendezVous.get().setConsultationValid(true);
+            rendezVous.get().getPatient().setDejaConsult(true);
+            return rendezVousDAO.save(rendezVous.get());
+        }
+        else {
+            return null;
+        }
+    }
+
     @Override
     public RendezVous saveRendezVous(RendezVous RendezVous){
         //RendezVous _RendezVous = new RendezVous();

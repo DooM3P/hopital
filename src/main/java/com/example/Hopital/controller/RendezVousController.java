@@ -37,7 +37,26 @@ public class RendezVousController {
     @GetMapping(path = "/{id}")
     public ResponseEntity<RendezVous> getRendezVousById(@PathVariable Long id) {
         try {
-            return new ResponseEntity<>(rendezVousService.getRendezVousByID(id), HttpStatus.CREATED);
+            return new ResponseEntity<>(rendezVousService.getRendezVousByID(id), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
+    @GetMapping(path = "/{id}/check")
+    public ResponseEntity<RendezVous> getRendezVousById2(@PathVariable Long id) {
+        try {
+            return new ResponseEntity<>(rendezVousService.getRendezVousByID(id), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+    @PostMapping(path = "/{id}/check")
+    public ResponseEntity<RendezVous> checkConsultationById(@PathVariable Long id) {
+        try {
+            return new ResponseEntity<>(rendezVousService.consultationCheckById(id), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }

@@ -15,6 +15,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import static org.mockito.Mockito.when;
 
@@ -55,25 +56,25 @@ public class RendezVousControllerTest {
         assertTrue(rendezVousController.getRendezVous().getStatusCode()==HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-//    @Test
-//    public void deleteRendezVoussTest() throws Exception {
-//        //given
-//        RendezVous rendezVous = new RendezVous();
-//        rendezVous.setId(2L);
-////        rendezVous.setTitle("Hhhh");
-////        rendezVous.setAuthor("Gilles H");
-////        rendezVous.setPrice(30);
-//
-//        //when
-//
-//        Mockito.when(rendezVousService.saveRendezVous(rendezVous)).thenReturn(rendezVous);
-//        rendezVousController.saveRendezVous(rendezVous);
-//        rendezVousController.deleteAll();
-//
-//        ResponseEntity<RendezVous> response = rendezVousController.getRendezVousById(2L);
-//
-//        //then
-//        assertThat(response.getBody()).isNull();
-//
-//    }
+    @Test
+    public void deleteRendezVoussTest() throws Exception {
+        //given
+        RendezVous rendezVous = new RendezVous();
+        rendezVous.setId(2L);
+//        rendezVous.setTitle("Hhhh");
+//        rendezVous.setAuthor("Gilles H");
+//        rendezVous.setPrice(30);
+
+        //when
+
+        Mockito.when(rendezVousService.saveRendezVous(rendezVous)).thenReturn(rendezVous);
+        rendezVousController.saveRendezVous(rendezVous);
+        rendezVousController.deleteAll();
+
+        ResponseEntity<RendezVous> response = rendezVousController.getRendezVousById(2L);
+
+        //then
+        assertThat(response.getBody()).isNull();
+
+    }
 }

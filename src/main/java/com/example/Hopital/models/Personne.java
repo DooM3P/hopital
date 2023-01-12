@@ -26,6 +26,14 @@ public abstract class Personne implements Serializable {
     public Personne() {
     }
 
+    public Personne(Long id) {
+        this.id = id;
+    }
+
+    public Personne(String nom) {
+        this.nom = nom;
+    }
+
     //getters
     public Long getId() {
         return id;

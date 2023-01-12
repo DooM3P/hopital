@@ -16,6 +16,10 @@ public class Medecin extends Personne{
     public Medecin() {
     }
 
+    public Medecin(Long id) {
+        super(id);
+    }
+
     public Medecin(int salaire, Specialite specialite) {
         this.salaire = salaire;
         this.specialite = specialite;
