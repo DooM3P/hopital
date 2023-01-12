@@ -9,6 +9,8 @@ public interface SpecialiteService {
 
     Specialite getSpecialiteByID(Long id);
 
+    Specialite getSpecialiteByName(String name);
+
     Specialite saveSpecialite(Specialite Specialite);
 
     Specialite updateSpecialite(Long id, Specialite Specialite);

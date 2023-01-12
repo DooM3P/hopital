@@ -35,8 +35,13 @@ public class RendezVousController {
     }
 
     @GetMapping(path = "/{id}")
-    public RendezVous getRendezVousById(@PathVariable Long id) {
-        return rendezVousService.getRendezVousByID(id);
+    public ResponseEntity<RendezVous> getRendezVousById(@PathVariable Long id) {
+        try {
+            return new ResponseEntity<>(rendezVousService.getRendezVousByID(id), HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
     @DeleteMapping(path = "/{id}")

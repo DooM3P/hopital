@@ -36,6 +36,17 @@ public class SpecialiteServiceImpl implements SpecialiteService{
             return null;
         }
     }
+
+    @Override
+    public Specialite getSpecialiteByName(String name) {
+        Optional<Specialite> specialite = SpecialiteDAO.findByName(name);
+        if(specialite.isPresent()) {
+            return specialite.get();
+        }else {
+            return null;
+        }
+    }
+
     @Override
     public Specialite saveSpecialite(Specialite Specialite){
         //Specialite _Specialite = new Specialite();

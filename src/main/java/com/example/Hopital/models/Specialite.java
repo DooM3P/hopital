@@ -20,6 +20,14 @@ public class Specialite implements Serializable {
     public Specialite() {
     }
 
+    public Specialite(Long code) {
+        this.code = code;
+    }
+
+    public Specialite(String name) {
+        this.name = name;
+    }
+
     //Getters et setters
     public Long getCode() {
         return code;

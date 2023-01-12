@@ -10,8 +10,11 @@ public class Patient extends Personne{
     @Column(name = "firstConsult")
     private boolean firstConsult=false;
 
+    //Constructeur
     public Patient() {
     }
+
+
 
     public Patient(boolean firstConsult) {
         this.firstConsult = firstConsult;
