@@ -49,13 +49,6 @@ public class SpecialiteServiceImpl implements SpecialiteService{
 
     @Override
     public Specialite saveSpecialite(Specialite Specialite){
-        //Specialite _Specialite = new Specialite();
-        //_Specialite.setTitle(Specialite.getTitle());
-        //_Specialite.setAuthor(Specialite.getAuthor());
-        //_Specialite.setPrice(Specialite.getPrice());
-        //_Specialite.setCategory(Specialite.getCategory());
-        //SpecialiteDAO.save(_Specialite);
-        //return _Specialite;
         return SpecialiteDAO.save(Specialite); // plus rapide mais bon...
     }
 

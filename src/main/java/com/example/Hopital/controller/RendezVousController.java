@@ -18,7 +18,7 @@ public class RendezVousController {
     @GetMapping(path = "/")
     public ResponseEntity<List<RendezVous>> getRendezVous() {
         try {
-            List<RendezVous> rendezVous = rendezVousService.getRendezVouss();
+            List<RendezVous> rendezVous = rendezVousService.getRendezVous();
             return new ResponseEntity<>(rendezVous, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -41,7 +41,6 @@ public class RendezVousController {
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
     }
 
     @GetMapping(path = "/{id}/check")

@@ -38,13 +38,6 @@ public class PatientServiceImpl implements PatientService{
     }
     @Override
     public Patient savePatient(Patient Patient){
-        //Patient _Patient = new Patient();
-        //_Patient.setTitle(Patient.getTitle());
-        //_Patient.setAuthor(Patient.getAuthor());
-        //_Patient.setPrice(Patient.getPrice());
-        //_Patient.setCategory(Patient.getCategory());
-        //PatientDAO.save(_Patient);
-        //return _Patient;
         return PatientDAO.save(Patient); // plus rapide mais bon...
     }
 

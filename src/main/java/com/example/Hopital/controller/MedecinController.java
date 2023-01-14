@@ -25,9 +25,6 @@ public class MedecinController {
     @Autowired
     private RendezVousService rendezVousService;
 
-    @Autowired
-    private SpecialiteService specialiteService;
-
     @GetMapping(path = "/")
     public ResponseEntity<List<Medecin>> getMedecin() {
         try {

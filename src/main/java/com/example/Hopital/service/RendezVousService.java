@@ -7,7 +7,7 @@ import com.example.Hopital.models.RendezVous;
 import java.util.List;
 
 public interface RendezVousService {
-    List<RendezVous> getRendezVouss();
+    List<RendezVous> getRendezVous();
 
     RendezVous getRendezVousByID(Long id);
 

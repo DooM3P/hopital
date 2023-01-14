@@ -20,7 +20,7 @@ public class RendezVousServiceImpl implements RendezVousService {
 
 
     @Override
-    public List<RendezVous> getRendezVouss() {
+    public List<RendezVous> getRendezVous() {
         List<RendezVous> rendezVous = (List<RendezVous>) rendezVousDAO.findAll();
         if(!rendezVous.isEmpty()){
             return rendezVous;
@@ -73,13 +73,6 @@ public class RendezVousServiceImpl implements RendezVousService {
 
     @Override
     public RendezVous saveRendezVous(RendezVous RendezVous){
-        //RendezVous _RendezVous = new RendezVous();
-        //_RendezVous.setTitle(RendezVous.getTitle());
-        //_RendezVous.setAuthor(RendezVous.getAuthor());
-        //_RendezVous.setPrice(RendezVous.getPrice());
-        //_RendezVous.setCategory(RendezVous.getCategory());
-        //RendezVousDAO.save(_RendezVous);
-        //return _RendezVous;
         return rendezVousDAO.save(RendezVous); // plus rapide mais bon...
     }
 

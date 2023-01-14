@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController // This means that this class is a Controller
@@ -35,8 +34,12 @@ public class SpecialiteController {
     }
 
     @GetMapping(path = "/{id}")
-    public Specialite getSpecialiteById(@PathVariable Long id) {
-        return specialiteService.getSpecialiteByID(id);
+    public ResponseEntity<Specialite> getSpecialiteById(@PathVariable Long id) {
+        try {
+            return new ResponseEntity<>(specialiteService.getSpecialiteByID(id), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @DeleteMapping(path = "/{id}")

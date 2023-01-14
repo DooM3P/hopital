@@ -1,39 +1,10 @@
 {
 	"info": {
-		"_postman_id": "c27d97cb-e5f7-4a0b-a14a-915eb7d7f12c",
+		"_postman_id": "6c7949e2-7af2-45f8-a748-f1825ddcf5e9",
 		"name": "hopital",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
-		{
-			"name": "localhost:8080/api/books/",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"title\":\"Roman 1\",\n    \"author\": \"Romancier\",\n    \"price\": 200,\n    \"category\" : 2\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8080/api/books/",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"books",
-						""
-					]
-				}
-			},
-			"response": []
-		},
 		{
 			"name": "postpatient",
 			"request": {
@@ -78,14 +49,14 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/api/patient/",
+					"raw": "localhost:8080/api/medecin/",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"api",
-						"patient",
+						"medecin",
 						""
 					]
 				}
@@ -122,9 +93,12 @@
 			"response": []
 		},
 		{
-			"name": "postconsultation",
+			"name": "postrendezvous",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
-				"method": "POST",
+				"method": "GET",
 				"header": [],
 				"body": {
 					"mode": "raw",
@@ -215,31 +189,19 @@
 		},
 		{
 			"name": "getRVbyPatient",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"dateRendezVous\": \"2005-01-11\",\n    \"patient\":3,\n    \"medecin\":2\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "localhost:8080/api/medecin/4/rendezvous",
+					"raw": "localhost:8080/api/patient/2/rendezvous",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"api",
-						"medecin",
-						"4",
+						"patient",
+						"2",
 						"rendezvous"
 					]
 				}
@@ -256,7 +218,39 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"code\" : 1\n}",
+					"raw": "{\n    \"code\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/medecin/specialite",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"medecin",
+						"specialite"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getMedecinBySpecialite2",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"code\": 2\n}",
 					"options": {
 						"raw": {
 							"language": "json"

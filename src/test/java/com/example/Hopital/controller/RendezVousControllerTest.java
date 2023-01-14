@@ -1,5 +1,7 @@
 package com.example.Hopital.controller;
 
+import com.example.Hopital.models.Medecin;
+import com.example.Hopital.models.Patient;
 import com.example.Hopital.models.RendezVous;
 import com.example.Hopital.service.RendezVousService;
 import org.junit.Test;
@@ -13,10 +15,9 @@ import org.springframework.http.ResponseEntity;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @RunWith(org.mockito.junit.MockitoJUnitRunner.class)
@@ -28,7 +29,7 @@ public class RendezVousControllerTest {
     private RendezVousService rendezVousService;
 
     @Test
-    public void getRendezVouss_withoutException(){
+    public void getRendezVous_withoutException(){
 
         //Given
         List<RendezVous> list = new ArrayList<>();
@@ -40,7 +41,7 @@ public class RendezVousControllerTest {
         list.add(firstRendezVous);
 
         //When
-        when(rendezVousService.getRendezVouss()).thenReturn(list);
+        when(rendezVousService.getRendezVous()).thenReturn(list);
         ResponseEntity<List<RendezVous>> resultat = rendezVousController.getRendezVous();
 
         //Then
@@ -49,21 +50,23 @@ public class RendezVousControllerTest {
 
     }
     @Test(expected = NullPointerException.class)
-    public void getRendezVouss_withException(){
-        when(rendezVousService.getRendezVouss()).thenThrow(new NullPointerException("Error occurred"));
+    public void getRendezVous_withException(){
+        when(rendezVousService.getRendezVous()).thenThrow(new NullPointerException("Error occurred"));
 
         //then
-        assertTrue(rendezVousController.getRendezVous().getStatusCode()==HttpStatus.INTERNAL_SERVER_ERROR);
+        assertSame(rendezVousController.getRendezVous().getStatusCode(),HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @Test
-    public void deleteRendezVoussTest() throws Exception {
+    public void deleteRendezVousTest() throws Exception {
         //given
         RendezVous rendezVous = new RendezVous();
+        Medecin medecin = new Medecin();
+        Patient patient = new Patient();
         rendezVous.setId(2L);
-//        rendezVous.setTitle("Hhhh");
-//        rendezVous.setAuthor("Gilles H");
-//        rendezVous.setPrice(30);
+        rendezVous.setConsultationValid(true);
+        rendezVous.setMedecin(medecin);
+        rendezVous.setPatient(patient);
 
         //when
 
