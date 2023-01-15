@@ -42,21 +42,13 @@ public class MedecinServiceImpl implements MedecinService{
 
     @Override
     public List<Medecin> getMedecinsBySpecialite(Specialite specialite) {
-        if(specialite.getName()!= null){
-            List<Medecin> medecinsBySpecialite = MedecinDAO.findBySpecialite(specialiteDAO.findByName(specialite.getName()).get());
-            if(!medecinsBySpecialite.isEmpty()){
-                return medecinsBySpecialite;
-            }else {
-                return null;
-            }
-        }
-        else {
-            List<Medecin> medecinsBySpecialite = MedecinDAO.findBySpecialite(specialite);
-            if(!medecinsBySpecialite.isEmpty()) {
-                return medecinsBySpecialite;
-            }else {
-                return null;
-            }
+        Optional<Specialite> specialite1 = specialiteDAO.findByName(specialite.getName());
+        if(!specialite1.isEmpty()){
+            List<Medecin> medecinsBySpecialite = MedecinDAO.findBySpecialite(specialite1.get()); // Si la specialité est passée en JSON par "name"
+            return medecinsBySpecialite;
+        }else {
+            List<Medecin> medecinsBySpecialite2 = MedecinDAO.findBySpecialite(specialite);// Si la specialité est passée en JSON par "code"
+            return medecinsBySpecialite2;
         }
     }
 
