@@ -1,5 +1,4 @@
 -- MariaDB dump 10.19  Distrib 10.9.4-MariaDB, for Linux (x86_64)
---
 -- Host: localhost    Database: hopital
 -- ------------------------------------------------------
 -- Server version	10.9.4-MariaDB
@@ -18,7 +17,6 @@
 --
 -- Table structure for table `medecin`
 --
-
 DROP TABLE IF EXISTS `medecin`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -42,8 +40,9 @@ CREATE TABLE `medecin` (
 LOCK TABLES `medecin` WRITE;
 /*!40000 ALTER TABLE `medecin` DISABLE KEYS */;
 INSERT INTO `medecin` VALUES
-(3,'1989-08-25','Le Duc','Hervé',150000,1),
-(4,'1989-08-25','Le Dac','Hervé',1520000,2);
+(4,'1974-03-25','Dingo','Hubert',156000,3),
+(5,'1974-03-25','Generali','Rocco',325000,1),
+(6,'1938-03-25','Bouché','Sylvie',36000,2);
 /*!40000 ALTER TABLE `medecin` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -71,8 +70,9 @@ CREATE TABLE `patient` (
 LOCK TABLES `patient` WRITE;
 /*!40000 ALTER TABLE `patient` DISABLE KEYS */;
 INSERT INTO `patient` VALUES
-(1,'1989-03-25','Leduc','Gerrd',''),
-(2,'1999-03-25','Leduc','Gerard','\0');
+(1,'1985-06-25','Dupont','Gerard','\0'),
+(2,'1954-06-25','Durand','Paul','\0'),
+(3,'1945-08-13','Tanaka','Pierre','');
 /*!40000 ALTER TABLE `patient` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,7 +117,7 @@ CREATE TABLE `rendezvous` (
   KEY `FKj36uqojhbkhx6b8ijg3uoju67` (`code_patient`),
   CONSTRAINT `FKffcoqtes82ibbqq00uhqoohrf` FOREIGN KEY (`code_medecin`) REFERENCES `medecin` (`id`),
   CONSTRAINT `FKj36uqojhbkhx6b8ijg3uoju67` FOREIGN KEY (`code_patient`) REFERENCES `patient` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -127,10 +127,12 @@ CREATE TABLE `rendezvous` (
 LOCK TABLES `rendezvous` WRITE;
 /*!40000 ALTER TABLE `rendezvous` DISABLE KEYS */;
 INSERT INTO `rendezvous` VALUES
-(1,'','2013-01-11',3,1),
-(2,'\0','2013-01-11',3,2),
-(3,'\0','2013-01-11',4,1),
-(4,'\0','2013-01-11',4,2);
+(1,'','2023-01-11',5,3),
+(2,'\0','2023-01-11',6,2),
+(3,'\0','2023-01-11',5,2),
+(4,'\0','2012-01-11',4,2),
+(5,'\0','2035-01-11',6,3),
+(6,'\0','2035-01-11',4,3);
 /*!40000 ALTER TABLE `rendezvous` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,7 +147,7 @@ CREATE TABLE `specialite` (
   `code` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`code`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -156,7 +158,8 @@ LOCK TABLES `specialite` WRITE;
 /*!40000 ALTER TABLE `specialite` DISABLE KEYS */;
 INSERT INTO `specialite` VALUES
 (1,'Generaliste'),
-(2,'Specialiste');
+(2,'Gastro-Entérologue'),
+(3,'Psychiatre');
 /*!40000 ALTER TABLE `specialite` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -173,4 +176,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-01-13  8:37:18
+-- Dump completed on 2023-01-15 18:26:54
