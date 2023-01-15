@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "6c7949e2-7af2-45f8-a748-f1825ddcf5e9",
+		"_postman_id": "062c1b4f-6580-4769-b3c8-d660859d3965",
 		"name": "hopital",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"nom\":\"Dupont\",\n    \"prenom\":\"Gerard\",\n    \"dateNaissance\" :  \"2001-06-25\"\n}",
+					"raw": "{\n    \"nom\":\"Tanaka\",\n    \"prenom\":\"Pierre\",\n    \"dateNaissance\" :  \"1945-08-13\",\n    \"deja_consult\" : false\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -41,7 +41,36 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"nom\":\"Dupont\",\n    \"prenom\":\"Gerard\",\n    \"dateNaissance\" :  \"2001-06-25\"\n}",
+					"raw": "{\n    \"nom\":\"Dingo\",\n    \"prenom\":\"Hubert\",\n    \"salaire\" : 156000,\n    \"dateNaissance\" :  \"1974-03-25\",\n    \"specialite\" : 3\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/medecin/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"medecin",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "postmedecin2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nom\":\"Bouché\",\n    \"prenom\":\"Sylvie\",\n    \"salaire\" : 36000,\n    \"dateNaissance\" :  \"1938-03-25\",\n    \"specialite\" : \"Gastro-Entérologue\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -70,7 +99,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"Expert Java\"\n}",
+					"raw": "{\n    \"name\": \"Psychiatre\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -94,15 +123,12 @@
 		},
 		{
 			"name": "postrendezvous",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"dateRendezVous\": \"2023-01-11\",\n    \"consultationValid\": false,\n    \"patient\":3,\n    \"medecin\":2\n}",
+					"raw": "{\n    \"dateRendezVous\": \"2023-01-11\",\n    \"consultationValid\": false,\n    \"patient\": \"Tanaka\",\n    \"medecin\": \"Generali\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -125,13 +151,13 @@
 			"response": []
 		},
 		{
-			"name": "postconsultationcheck",
+			"name": "postrendezvous2",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"dateRendezVous\": \"2022-01-11\",\n    \"patient\":{\"id\":2},\n    \"medecin\":{\"id\":4}\n}",
+					"raw": "{\n    \"dateRendezVous\": \"2035-01-11\",\n    \"consultationValid\": false,\n    \"patient\": 3,\n    \"medecin\": \"Dingo\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -139,7 +165,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/api/rendezvous/1/check",
+					"raw": "localhost:8080/api/rendezvous/",
 					"host": [
 						"localhost"
 					],
@@ -147,7 +173,36 @@
 					"path": [
 						"api",
 						"rendezvous",
-						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "postconsultationcheck (quand la consultation a eu lieu)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/rendezvous/2/check",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"rendezvous",
+						"2",
 						"check"
 					]
 				}
@@ -156,6 +211,39 @@
 		},
 		{
 			"name": "getRVbyMedecin",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/medecin/4/rendezvous",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"medecin",
+						"4",
+						"rendezvous"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getRVbyPatient",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -188,27 +276,6 @@
 			"response": []
 		},
 		{
-			"name": "getRVbyPatient",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/api/patient/2/rendezvous",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"patient",
-						"2",
-						"rendezvous"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "getMedecinBySpecialite",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -218,7 +285,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"code\": 2\n}",
+					"raw": "{\n    \"name\": \"Gastro-Entérologue\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -250,7 +317,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"code\": 2\n}",
+					"raw": "{\n    \"name\": \"Generaliste\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"

@@ -30,22 +30,11 @@ public class PatientServiceImpl implements PatientService{
     @Override
     public Patient getPatientByID(Long id) {
         Optional<Patient> _Patient = PatientDAO.findById(id);
-        if(_Patient.isPresent()) {
-            return _Patient.get();
-        }else {
-            return null;
-        }
+        return _Patient.orElse(null);
     }
     @Override
     public Patient savePatient(Patient Patient){
         return PatientDAO.save(Patient); // plus rapide mais bon...
-    }
-
-    @Override
-    public Patient updatePatient(Long id, Patient Patient) {
-        Optional<Patient> retrievedPatient = PatientDAO.findById(id);
-        PatientDAO.save(retrievedPatient.get());
-        return retrievedPatient.get();
     }
 
     @Override

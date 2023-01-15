@@ -11,8 +11,6 @@ public interface PatientService {
 
     Patient savePatient(Patient Patient);
 
-    Patient updatePatient(Long id, Patient Patient);
-
     void deleteByID(Long id);
 
     void deleteAll();

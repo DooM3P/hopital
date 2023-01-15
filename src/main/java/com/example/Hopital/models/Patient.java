@@ -18,15 +18,19 @@ public class Patient extends Personne{
         super(id);
     }
 
-    public Patient(boolean firstConsult) {
-        this.dejaConsult = firstConsult;
+    public Patient(String nom) {
+        super(nom);
     }
 
-    public boolean isFirstConsult() {
+    public Patient(boolean dejaConsult) {
+        this.dejaConsult = dejaConsult;
+    }
+
+    public boolean isDejaConsult() {
         return dejaConsult;
     }
 
-    public void setDejaConsult(boolean firstConsult) {
-        this.dejaConsult = firstConsult;
+    public void setDejaConsult(boolean dejaConsult) {
+        this.dejaConsult = dejaConsult;
     }
 }

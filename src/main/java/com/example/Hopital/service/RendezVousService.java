@@ -13,13 +13,11 @@ public interface RendezVousService {
 
     RendezVous saveRendezVous(RendezVous RendezVous);
 
-    abstract List<RendezVous> getRendezVousByMedecin(Medecin medecin);
+    List<RendezVous> getRendezVousByMedecin(Medecin medecin);
 
     List<RendezVous> getRendezVousByPatient(Patient patient);
 
     RendezVous consultationCheckById(Long id);
-
-    RendezVous updateRendezVous(Long id, RendezVous RendezVous);
 
     void deleteByID(Long id);
 

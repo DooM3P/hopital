@@ -1,5 +1,7 @@
 package com.example.Hopital.service;
 
+import com.example.Hopital.DAO.MedecinDAO;
+import com.example.Hopital.DAO.PatientDAO;
 import com.example.Hopital.DAO.RendezVousDAO;
 import com.example.Hopital.models.Medecin;
 import com.example.Hopital.models.Patient;
@@ -17,6 +19,12 @@ public class RendezVousServiceImpl implements RendezVousService {
     @Autowired
     private RendezVousDAO rendezVousDAO;
 
+    @Autowired
+    private MedecinDAO medecinDAO;
+
+    @Autowired
+    private PatientDAO patientDAO;
+
 
 
     @Override
@@ -32,11 +40,7 @@ public class RendezVousServiceImpl implements RendezVousService {
     @Override
     public RendezVous getRendezVousByID(Long id) {
         Optional<RendezVous> _RendezVous = rendezVousDAO.findById(id);
-        if(_RendezVous.isPresent()) {
-            return _RendezVous.get();
-        }else {
-            return null;
-        }
+        return _RendezVous.orElse(null);
     }
 
     @Override
@@ -61,7 +65,7 @@ public class RendezVousServiceImpl implements RendezVousService {
     @Override
     public RendezVous consultationCheckById(Long id) {
         Optional<RendezVous> rendezVous = rendezVousDAO.findById(id);
-        if(rendezVous.isPresent() & rendezVous.get().isConsultationValid()==false) {
+        if(rendezVous.isPresent() & !rendezVous.get().isConsultationValid()) {
             rendezVous.get().setConsultationValid(true);
             rendezVous.get().getPatient().setDejaConsult(true);
             return rendezVousDAO.save(rendezVous.get());
@@ -72,15 +76,26 @@ public class RendezVousServiceImpl implements RendezVousService {
     }
 
     @Override
-    public RendezVous saveRendezVous(RendezVous RendezVous){
-        return rendezVousDAO.save(RendezVous); // plus rapide mais bon...
-    }
+    public RendezVous saveRendezVous(RendezVous rendezVous){
+        RendezVous rendezVous1 = new RendezVous();
 
-    @Override
-    public RendezVous updateRendezVous(Long id, RendezVous RendezVous) {
-        Optional<RendezVous> retrievedRendezVous = rendezVousDAO.findById(id);
-        rendezVousDAO.save(retrievedRendezVous.get());
-        return retrievedRendezVous.get();
+        List<Patient> patient = patientDAO.findByNom(rendezVous.getPatient().getNom());//Récupère le patient passé en nom ou en code
+        if(!patient.isEmpty()){
+            rendezVous1.setPatient(patient.get(0));
+        }else{
+            rendezVous1.setPatient(rendezVous.getPatient());
+        }
+
+        List<Medecin> medecin = medecinDAO.findByNom(rendezVous.getMedecin().getNom());//Récupère le medecin passé en nom ou en code
+        if(!medecin.isEmpty()){
+            rendezVous1.setMedecin(medecin.get(0));
+        }else{
+            rendezVous1.setMedecin(rendezVous.getMedecin());
+        }
+
+        rendezVous1.setDateRendezVous(rendezVous.getDateRendezVous());
+        rendezVous1.setConsultationValid(rendezVous.isConsultationValid());
+        return rendezVousDAO.save(rendezVous1);
     }
 
     @Override

@@ -30,33 +30,12 @@ public class SpecialiteServiceImpl implements SpecialiteService{
     @Override
     public Specialite getSpecialiteByID(Long id) {
         Optional<Specialite> _Specialite = SpecialiteDAO.findById(id);
-        if(_Specialite.isPresent()) {
-            return _Specialite.get();
-        }else {
-            return null;
-        }
-    }
-
-    @Override
-    public Specialite getSpecialiteByName(String name) {
-        Optional<Specialite> specialite = SpecialiteDAO.findByName(name);
-        if(specialite.isPresent()) {
-            return specialite.get();
-        }else {
-            return null;
-        }
+        return _Specialite.orElse(null);
     }
 
     @Override
     public Specialite saveSpecialite(Specialite Specialite){
         return SpecialiteDAO.save(Specialite); // plus rapide mais bon...
-    }
-
-    @Override
-    public Specialite updateSpecialite(Long id, Specialite Specialite) {
-        Optional<Specialite> retrievedSpecialite = SpecialiteDAO.findById(id);
-        SpecialiteDAO.save(retrievedSpecialite.get());
-        return retrievedSpecialite.get();
     }
 
     @Override

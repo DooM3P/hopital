@@ -15,7 +15,6 @@ public interface MedecinService {
 
     Medecin saveMedecin(Medecin Medecin);
 
-    Medecin updateMedecin(Long id, Medecin Medecin);
 
     void deleteByID(Long id);
 

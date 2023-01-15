@@ -33,22 +33,16 @@ public class MedecinServiceImpl implements MedecinService{
     @Override
     public Medecin getMedecinByID(Long id) {
         Optional<Medecin> _Medecin = MedecinDAO.findById(id);
-        if(_Medecin.isPresent()) {
-            return _Medecin.get();
-        }else {
-            return null;
-        }
+        return _Medecin.orElse(null);
     }
 
     @Override
     public List<Medecin> getMedecinsBySpecialite(Specialite specialite) {
         Optional<Specialite> specialite1 = specialiteDAO.findByName(specialite.getName());
-        if(!specialite1.isEmpty()){
-            List<Medecin> medecinsBySpecialite = MedecinDAO.findBySpecialite(specialite1.get()); // Si la specialité est passée en JSON par "name"
-            return medecinsBySpecialite;
+        if(specialite1.isPresent()){
+            return MedecinDAO.findBySpecialite(specialite1.get());
         }else {
-            List<Medecin> medecinsBySpecialite2 = MedecinDAO.findBySpecialite(specialite);// Si la specialité est passée en JSON par "code"
-            return medecinsBySpecialite2;
+            return MedecinDAO.findBySpecialite(specialite);
         }
     }
 
@@ -59,21 +53,15 @@ public class MedecinServiceImpl implements MedecinService{
         medecin1.setprenom(medecin.getPrenom());
         medecin1.setSalaire(medecin.getSalaire());
         medecin1.setDateNaissance(medecin.getDateNaissance());
-        if(medecin.getSpecialite().getName()!= null){
-            medecin1.setSpecialite(specialiteDAO.findByName(medecin.getSpecialite().getName()).get());
+        Optional<Specialite> specialite1 = specialiteDAO.findByName(medecin.getSpecialite().getName());
+        if(specialite1.isPresent()){
+            medecin1.setSpecialite(specialite1.get());// Si la specialité est passée en JSON par "name"
         }else {
-            medecin1.setSpecialite(medecin.getSpecialite());
+            medecin1.setSpecialite(medecin.getSpecialite());// Si la specialité est passée en JSON par "code"
         }
         MedecinDAO.save(medecin1);
         return medecin1;
 //        return MedecinDAO.save(medecin);
-    }
-
-    @Override
-    public Medecin updateMedecin(Long id, Medecin Medecin) {
-        Optional<Medecin> retrievedMedecin = MedecinDAO.findById(id);
-        MedecinDAO.save(retrievedMedecin.get());
-        return retrievedMedecin.get();
     }
 
     @Override

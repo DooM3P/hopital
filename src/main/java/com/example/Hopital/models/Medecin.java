@@ -20,6 +20,10 @@ public class Medecin extends Personne{
         super(id);
     }
 
+    public Medecin(String nom) {
+        super(nom);
+    }
+
     public Medecin(int salaire, Specialite specialite) {
         this.salaire = salaire;
         this.specialite = specialite;
