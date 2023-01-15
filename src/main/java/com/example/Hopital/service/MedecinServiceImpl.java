@@ -66,6 +66,7 @@ public class MedecinServiceImpl implements MedecinService{
         medecin1.setNom(medecin.getNom());
         medecin1.setprenom(medecin.getPrenom());
         medecin1.setSalaire(medecin.getSalaire());
+        medecin1.setDateNaissance(medecin.getDateNaissance());
         if(medecin.getSpecialite().getName()!= null){
             medecin1.setSpecialite(specialiteDAO.findByName(medecin.getSpecialite().getName()).get());
         }else {

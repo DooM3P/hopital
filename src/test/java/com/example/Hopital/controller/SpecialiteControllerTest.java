@@ -51,7 +51,7 @@ public class SpecialiteControllerTest {
         assertEquals(HttpStatus.OK, resultat.getStatusCode());
 
     }
-    @Test(expected = NullPointerException.class)
+    @Test
     public void getSpecialite_withException(){
         when(specialiteService.getSpecialites()).thenThrow(new NullPointerException("Error occurred"));
 

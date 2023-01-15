@@ -49,7 +49,7 @@ public class RendezVousControllerTest {
         assertEquals(HttpStatus.OK, resultat.getStatusCode());
 
     }
-    @Test(expected = NullPointerException.class)
+    @Test
     public void getRendezVous_withException(){
         when(rendezVousService.getRendezVous()).thenThrow(new NullPointerException("Error occurred"));
 
