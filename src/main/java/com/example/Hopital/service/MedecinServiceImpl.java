@@ -1,6 +1,7 @@
 package com.example.Hopital.service;
 
 import com.example.Hopital.DAO.MedecinDAO;
+import com.example.Hopital.DAO.SpecialiteDAO;
 import com.example.Hopital.models.Medecin;
 import com.example.Hopital.models.Specialite;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class MedecinServiceImpl implements MedecinService{
 
     @Autowired
     private MedecinDAO MedecinDAO;
+
+    @Autowired
+    private SpecialiteDAO specialiteDAO;
 
     @Override
     public List<Medecin> getMedecins() {
@@ -38,23 +42,27 @@ public class MedecinServiceImpl implements MedecinService{
 
     @Override
     public List<Medecin> getMedecinsBySpecialite(Specialite specialite) {
-        List<Medecin> medecinsBySpecialite = MedecinDAO.findBySpecialite(specialite);
-        if(!medecinsBySpecialite.isEmpty()){
+        Optional<Specialite> specialite1 = specialiteDAO.findByName(specialite.getName());
+        if(!specialite1.isEmpty()){
+            List<Medecin> medecinsBySpecialite = MedecinDAO.findBySpecialite(specialite1.get()); // Si la specialité est passée en JSON par "name"
             return medecinsBySpecialite;
         }else {
-            return null;
+            List<Medecin> medecinsBySpecialite2 = MedecinDAO.findBySpecialite(specialite);// Si la specialité est passée en JSON par "code"
+            return medecinsBySpecialite2;
         }
     }
 
     @Override
-    public Medecin saveMedecin(Medecin Medecin){
-        //Medecin _Medecin = new Medecin();
-        //_Medecin.setTitle(Medecin.getTitle());
-        //_Medecin.setAuthor(Medecin.getAuthor());
-        //_Medecin.setPrice(Medecin.getPrice());
-        //_Medecin.setCategory(Medecin.getCategory());
-        //MedecinDAO.save(_Medecin);
-        //return _Medecin;
+    public Medecin saveMedecin(Medecin medecin){
+        Medecin medecin2 = new Medecin();
+        medecin2.setNom(medecin.getNom());
+        medecin2.setprenom(medecin.getPrenom());
+        medecin2.setSalaire(medecin.getSalaire());
+        medecin2.setDateNaissance(medecin.getDateNaissance());
+        Optional<Specialite> specialite = specialiteDAO.findByName(medecin.getSpecialite().getName());
+        
+        MedecinDAO.save(_Medecin);
+        return _Medecin;
         return MedecinDAO.save(Medecin); // plus rapide mais bon...
     }
 
